@@ -7,5 +7,19 @@ feature 'tweets' do
       visit tweets_path
       expect(page).to have_content 'No tweets yet!'
     end
-  end  
+  end
+
+  context 'creating tweets' do
+    before do
+      visit tweets_path
+      user = create(:user)
+      sign_up(user)
+    end
+    scenario 'a tweet can be created' do
+      visit tweets_path
+      fill_in 'message-box', with: 'test tweet'
+      click_button 'Post message'
+      expect(page).to have_content 'test tweet'
+    end
+  end
 end
