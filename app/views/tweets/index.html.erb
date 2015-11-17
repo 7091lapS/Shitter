@@ -1,19 +1,32 @@
 <html>
   <body>
     <h1>Welcome to Shitter</h1>
-    <section class='devise'>
       <% if user_signed_in? %>
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <div class="devise-in">
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        </div>
+        <h2>
+          <%= form_for @tweet, html: {class: "tweet-form"} do |f| %>
+            <%= f.text_field :tweet_content, :placeholder => "What's up?", :class => 'tweet-text-field' %>
+            <%= f.submit 'Post message' %>
+          <% end %>
+        </h2>
       <% else %>
-        <%= link_to "Sign in", new_user_session_path %>
-        <%= link_to "Sign up", new_user_registration_path %>
+        <div class="devise-out">
+          <%= link_to "Sign in", new_user_session_path %>
+          <%= link_to "Sign up", new_user_registration_path %>
+        </div>
       <% end %>
-    </section>
-    <h2>
-      <%= form_for @tweet, html: {class: "tweet-form"} do |f| %>
-        <%= f.text_field :tweet_content, :placeholder => "What's up?" %>
-        <%= f.submit 'Post message' %>
+      <% if @tweets.any? %>
+        <ul class='tweets'>
+          <% @tweets.reverse.each do |tweet| %>
+            <li>
+              <%=tweet.user.email %>: <%=tweet.tweet_content %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No tweets yet!</p>
       <% end %>
-    <p>No tweets yet!</p>
   </body>
 </html>

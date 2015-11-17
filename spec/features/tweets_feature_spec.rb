@@ -12,15 +12,15 @@ feature 'tweets' do
   context 'creating tweets' do
     before do
       visit tweets_path
-      user = create(:user)
-      sign_up(user)
+      @user = create(:user)
+      sign_in(@user)
     end
 
     scenario 'a tweet can be created' do
       visit tweets_path
-      fill_in 'tweet-form', with: 'test tweet'
+      fill_in "tweet[tweet_content]", with: 'test tweet'
       click_button 'Post message'
-      expect(page).to have_content 'test tweet'
+      expect(page).to have_content "#{@user.email}: test tweet"
     end
   end
 end
