@@ -18,7 +18,7 @@ feature 'tweets' do
 
     scenario 'a tweet can be created' do
       visit tweets_path
-      fill_in 'message-box', with: 'test tweet'
+      fill_in 'tweet-form', with: 'test tweet'
       click_button 'Post message'
       expect(page).to have_content 'test tweet'
     end
