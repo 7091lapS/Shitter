@@ -17,6 +17,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'shoulda'
 end
 group :development do
   gem 'web-console', '~> 2.0'
