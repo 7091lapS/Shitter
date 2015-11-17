@@ -9,6 +9,9 @@ class TweetsController < ApplicationController
     @tweet = current_user.tweets.new(tweet_params)
     if @tweet.save
       redirect_to tweets_path
+    elsif @tweet.tweet_content.length > 140
+      flash[:alert] = 'Max post length is 140 characters'
+      redirect_to tweets_path
     else
       flash[:alert] = 'There was an error posting your message'
       redirect_to tweets_path
