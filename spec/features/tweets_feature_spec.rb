@@ -15,6 +15,7 @@ feature 'tweets' do
       user = create(:user)
       sign_up(user)
     end
+
     scenario 'a tweet can be created' do
       visit tweets_path
       fill_in 'message-box', with: 'test tweet'

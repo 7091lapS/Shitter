@@ -13,12 +13,12 @@ gem 'devise'
 group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-end
-group :test do
-  gem 'rspec-rails'
-  gem 'capybara'
 end

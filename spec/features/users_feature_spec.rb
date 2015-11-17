@@ -24,13 +24,11 @@ feature 'users management' do
   end
 
   context 'user signed in' do
+
     before do
+      user = create(:user)
       visit tweets_path
-      click_link 'Sign up'
-      fill_in('Email', with: 'user@test.com')
-      fill_in('Password', with: 'testtest')
-      fill_in('Password confirmation', with: 'testtest')
-      click_button 'Sign up'
+      sign_in(user)
     end
 
     scenario 'shows a sign out link' do
@@ -41,8 +39,11 @@ feature 'users management' do
       expect(page).not_to have_link('Sign in')
       expect(page).not_to have_link('Sign up')
     end
+
     scenario 'shows a tweet creation button' do
       expect(page).to have_button('Post message')
     end
+
   end
+  
 end
