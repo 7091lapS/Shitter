@@ -6,7 +6,7 @@
           <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
         </div>
         <div class='all'>
-          <a href="/following">Following</a>
+          <a href="/tweets">All tweets</a>
         </div>
         <h2>
           <%= form_for @tweet, html: {class: "tweet-form"} do |f| %>
@@ -21,10 +21,10 @@
         </div>
       <% end %>
       <% if @tweets.any? %>
-        <ul class='tweets'>
+        <ul class='following'>
           <% @tweets.each do |tweet| %>
             <li>
-              <%=tweet.user.email %>: <%=tweet.tweet_content %>
+            <%=tweet.user.email %>: <%=tweet.tweet_content %>
             </li>
           <% end %>
         </ul>
