@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'messages by folowed users' do
+feature 'following and unfollowing users' do
 
   context 'signed in without any followed users' do
     before do
@@ -36,5 +36,21 @@ feature 'messages by folowed users' do
       click_link 'Following'
       expect(page).to have_content('a tweet by mr poster')
     end
+  end
+
+  context 'visting as signed out guest' do
+
+    scenario 'a guest cannot see stream section links' do
+      visit tweets_path
+      expect(page).not_to have_link 'All tweets'
+      expect(page).not_to have_link 'Following'
+    end
+
+    scenario 'a guest cannot see follow/unfollow links' do
+      visit tweets_path
+      expect(page).not_to have_link 'Follow'
+      expect(page).not_to have_link 'Unfollow'
+    end
+
   end
 end

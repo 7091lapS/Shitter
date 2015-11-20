@@ -22,7 +22,7 @@
       <% end %>
       <% if @tweets.any? %>
         <ul class='tweets'>
-          <% @tweets.each do |tweet| %>
+          <% @tweets.reverse.each do |tweet| %>
             <li>
               <%=tweet.user.email %>: <%=tweet.tweet_content %>
             </li>

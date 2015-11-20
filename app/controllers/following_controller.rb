@@ -1,5 +1,7 @@
 class FollowingController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @tweet = Tweet.new
     @tweets = []
@@ -8,7 +10,6 @@ class FollowingController < ApplicationController
         @tweets << tweet
       end
     end
-    p @tweets
   end
 
   def create
