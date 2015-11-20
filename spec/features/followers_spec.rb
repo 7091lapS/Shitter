@@ -2,23 +2,57 @@ require 'rails_helper'
 
 feature 'following and unfollowing users' do
 
-  context 'signed in without any followed users' do
+  context 'user signed in' do
     before do
       user_1 = create(:user)
       @user_2 = create(:user)
       visit tweets_path
       sign_in(user_1)
-    end
-
-    scenario 'a user cannot see posts by unfollowed users' do
       fill_in "tweet[tweet_content]", with: 'test tweet by user_1'
       click_button 'Post message'
       click_link 'Sign out'
       sign_in(@user_2)
       visit tweets_path
+    end
+
+    scenario 'cannot see posts by unfollowed users' do
       click_link('Following')
-      expect(page).not_to have_content('test tweet by user_1')
-      expect(page).to have_content('No tweets yet!')
+      expect(page).not_to have_content 'test tweet by user_1'
+      expect(page).to have_content 'No tweets yet!'
+    end
+
+    scenario 'can see a link to follow another user' do
+      within('ul') do
+        expect(page).to have_link 'Follow'
+      end
+    end
+
+    scenario 'after following, should see the tweet in the Following stream' do
+      click_link 'Follow'
+      click_link 'Following'
+      expect(page).to have_content 'test tweet by user_1'
+    end
+
+    scenario 'after following, should see Unfollow links' do
+      click_link 'Follow'
+      expect(page).to have_link 'Unfollow'
+      click_link 'Following'
+      expect(page).to have_link 'Unfollow'
+    end
+
+    scenario 'after unfollowing, should see the Follow links again' do
+      click_link 'Follow'
+      click_link 'Unfollow'
+      within('ul') do
+        expect(page).to have_link 'Follow'
+      end
+    end
+
+    scenario 'after unfollowing, should not see the post in the Following stream' do
+      click_link 'Follow'
+      click_link 'Unfollow'
+      click_link 'Following'
+      expect(page).not_to have_content 'test tweet by user_1'
     end
   end
 
@@ -34,7 +68,7 @@ feature 'following and unfollowing users' do
 
     scenario 'the follower can see the posters post' do
       click_link 'Following'
-      expect(page).to have_content('a tweet by mr poster')
+      expect(page).to have_content 'a tweet by mr poster'
     end
   end
 
@@ -51,6 +85,5 @@ feature 'following and unfollowing users' do
       expect(page).not_to have_link 'Follow'
       expect(page).not_to have_link 'Unfollow'
     end
-
   end
 end
