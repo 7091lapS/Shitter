@@ -28,14 +28,14 @@ feature 'following and unfollowing users' do
     # end
 
     scenario 'after following, should see the tweet in the Following stream' do
-      click_link "#{@user_2.email}"
+      click_link "#{@user_2.username}"
       click_link 'Follow'
       click_link 'Following Stream'
       expect(page).to have_content 'test tweet by user_1'
     end
 
     scenario 'after following, should see Unfollow link' do
-      click_link "#{@user_2.email}"
+      click_link "#{@user_2.username}"
       click_link 'Follow'
       expect(page).to have_link 'Unfollow'
       click_link 'Unfollow'
@@ -43,7 +43,7 @@ feature 'following and unfollowing users' do
     end
 
     scenario 'after unfollowing, should not see the post in the Following stream' do
-      click_link "#{@user_2.email}"
+      click_link "#{@user_2.username}"
       click_link 'Follow'
       click_link 'Unfollow'
       click_link 'Following Stream'

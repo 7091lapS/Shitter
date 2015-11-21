@@ -20,9 +20,9 @@ feature 'tweets' do
       visit tweets_path
       fill_in "tweet[tweet_content]", with: 'test tweet'
       click_button 'Post message'
-      expect(page).to have_content "#{@user.email} => test tweet"
+      expect(page).to have_content "#{@user.username} => test tweet"
       click_link 'Sign out'
-      expect(page).to have_content "#{@user.email} => test tweet"
+      expect(page).to have_content "#{@user.username} => test tweet"
     end
   end
 end

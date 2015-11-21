@@ -24,7 +24,7 @@
         <ul class='tweets'>
           <% @tweets.reverse.each do |tweet| %>
             <li>
-              <%=tweet.user.email %> => <%=tweet.tweet_content %>
+              <%=tweet.user.username %> => <%=tweet.tweet_content %>
             </li>
           <% end %>
         </ul>
