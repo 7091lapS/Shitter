@@ -16,42 +16,37 @@ feature 'following and unfollowing users' do
     end
 
     scenario 'cannot see posts by unfollowed users' do
-      click_link('Following')
+      click_link('Following Stream')
       expect(page).not_to have_content 'test tweet by user_1'
       expect(page).to have_content 'No tweets yet!'
     end
 
-    scenario 'can see a link to follow another user' do
-      within('ul') do
-        expect(page).to have_link 'Follow'
-      end
-    end
+    # scenario 'can see a link to follow another user' do
+    #   within('ul') do
+    #     expect(page).to have_link 'Follow'
+    #   end
+    # end
 
     scenario 'after following, should see the tweet in the Following stream' do
+      click_link "#{@user_2.email}"
       click_link 'Follow'
-      click_link 'Following'
+      click_link 'Following Stream'
       expect(page).to have_content 'test tweet by user_1'
     end
 
-    scenario 'after following, should see Unfollow links' do
+    scenario 'after following, should see Unfollow link' do
+      click_link "#{@user_2.email}"
       click_link 'Follow'
       expect(page).to have_link 'Unfollow'
-      click_link 'Following'
-      expect(page).to have_link 'Unfollow'
-    end
-
-    scenario 'after unfollowing, should see the Follow links again' do
-      click_link 'Follow'
       click_link 'Unfollow'
-      within('ul') do
-        expect(page).to have_link 'Follow'
-      end
+      expect(page).to have_link 'Follow'
     end
 
     scenario 'after unfollowing, should not see the post in the Following stream' do
+      click_link "#{@user_2.email}"
       click_link 'Follow'
       click_link 'Unfollow'
-      click_link 'Following'
+      click_link 'Following Stream'
       expect(page).not_to have_content 'test tweet by user_1'
     end
   end

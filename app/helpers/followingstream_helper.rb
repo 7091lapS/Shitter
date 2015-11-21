@@ -1,0 +1,2 @@
+module FollowingstreamHelper
+end
