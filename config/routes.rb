@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   resources :tweets
   resources :followingstream
+  resources :relationships
   root to: 'tweets#index'
 
 end
