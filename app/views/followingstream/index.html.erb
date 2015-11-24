@@ -5,6 +5,12 @@
         <div class="devise-in">
           <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
         </div>
+        <section class='account'>
+          <%= current_user.username %>
+        </section>
+        <section class="follow-stats">
+          <%= render 'shared/follow_stats' %>
+        </section>
         <div class='all'>
           <a href="/tweets">All Stream</a>
         </div>

@@ -5,7 +5,13 @@
         <div class="devise-in">
           <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
         </div>
-        <div class='all'>
+        <section class='account'>
+          <%= current_user.username %>
+        </section>
+        <section class="stats">
+          <%= render 'shared/follow_stats' %>
+        </section>
+        <div class='following-stream'>
           <a href="/followingstream">Following Stream</a>
         </div>
         <h2>
