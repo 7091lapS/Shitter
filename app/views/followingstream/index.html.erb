@@ -30,7 +30,7 @@
         <ul class='tweets'>
           <% @tweets.reverse.each do |tweet| %>
             <li>
-              <%=tweet.user.username %> => <%=tweet.tweet_content %>
+              <%= link_to tweet.user.username, user_path(tweet.user.id) %> => <%=tweet.tweet_content %>
             </li>
           <% end %>
         </ul>
