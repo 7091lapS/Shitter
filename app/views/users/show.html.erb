@@ -8,29 +8,24 @@
         <section class='account'>
           <%= current_user.username %>
         </section>
-        <section class="stats">
+        <section class="follow-stats">
           <%= render 'shared/follow_stats' %>
         </section>
-        <div class='following-stream'>
-          <a href="/followingstream">Following Stream</a>
+        <div class='all'>
+          <a href="/tweets">All Stream</a>
         </div>
-        <h2>
-          <%= form_for @tweet, html: {class: "tweet-form"} do |f| %>
-            <%= f.text_field :tweet_content, :placeholder => "What's up?", :class => 'tweet-text-field' %>
-            <%= f.submit 'Post message' %>
-          <% end %>
-        </h2>
       <% else %>
         <div class="devise-out">
           <%= link_to "Sign in", new_user_session_path %>
           <%= link_to "Sign up", new_user_registration_path %>
         </div>
       <% end %>
-      <% if @tweets.any? %>
+      <%= @user.username %>'s tweets
+      <% if @user.tweets.any? %>
         <ul class='tweets'>
           <% @tweets.reverse.each do |tweet| %>
             <li>
-              <%= link_to tweet.user.username, user_path(tweet.user.id) %> => <%=tweet.tweet_content %>
+              <%=tweet.user.username %> => <%=tweet.tweet_content %>
             </li>
           <% end %>
         </ul>
