@@ -8,9 +8,7 @@
         <section class='account'>
           <%= current_user.username %>
         </section>
-        <section class="follow-stats">
-          <%= render 'shared/follow_stats' %>
-        </section>
+        <%= render 'follow_form' %>
         <div class='all'>
           <a href="/tweets">All Stream</a>
         </div>
@@ -21,6 +19,9 @@
         </div>
       <% end %>
       <%= @user.username %>'s tweets
+      <section class="follow-stats">
+        <%= render 'shared/follow_stats' %>
+      </section>
       <% if @user.tweets.any? %>
         <ul class='tweets'>
           <% @tweets.reverse.each do |tweet| %>
