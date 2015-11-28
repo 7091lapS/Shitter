@@ -6,7 +6,8 @@
           <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
         </div>
         <section class='account'>
-          <%= link_to current_user.username, user_path(current_user) %>
+          <%= current_user.username %>
+          <%= link_to "Edit Profile", edit_user_registration_path %>
         </section>
         <%= render 'follow_form' %>
         <div class='all'>
