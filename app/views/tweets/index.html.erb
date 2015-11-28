@@ -6,7 +6,7 @@
           <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
         </div>
         <section class='account'>
-          <%= current_user.username %>
+          <%= link_to current_user.username, user_path(current_user) %>
         </section>
         <section class="follow-stats">
           <%= render 'shared/follow_stats' %>

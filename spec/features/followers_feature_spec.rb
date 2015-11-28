@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'following and unfollowing users' do
 
   context 'user signed in' do
+
     before do
       @user_1 = create(:user)
       @user_2 = create(:user)
@@ -19,6 +20,11 @@ feature 'following and unfollowing users' do
       click_link('Following Stream')
       expect(page).not_to have_content 'test tweet by user_1'
       expect(page).to have_content 'No tweets yet!'
+    end
+
+    scenario 'cannot follow themselves' do
+      click_link "#{@user_2.username}"
+      expect(page).not_to have_button "Follow"
     end
 
     scenario 'after following, should see the tweet in the Following stream' do
@@ -61,7 +67,7 @@ feature 'following and unfollowing users' do
     end
   end
 
-  context 'visting as signed out guest' do
+  context 'visting as guest' do
 
     scenario 'a guest cannot see stream section links' do
       visit tweets_path
